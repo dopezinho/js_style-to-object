@@ -16,16 +16,13 @@ function convertToObject(sourceString) {
       continue;
     }
 
-    const index = ar.indexOf(':');
+    const [key, value] = ar.split(':');
 
-    if (index === -1) {
+    if (typeof value === 'undefined') {
       continue;
     }
 
-    const key = ar.slice(0, index).trim();
-    const value = ar.slice(index + 1).trim();
-
-    result[key] = value;
+    result[key.trim()] = value.trim();
   }
 
   return result;
