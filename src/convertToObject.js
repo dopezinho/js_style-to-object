@@ -6,26 +6,25 @@
  * @return {object}
  */
 function convertToObject(sourceString) {
-  const result = {};
-  const arrs = sourceString.split(';');
+  const arr = sourceString.split(';').filter((x) => x.trim() !== '');
+  const tab = [];
 
-  for (let i = 0; i < arrs.length; i++) {
-    const ar = arrs[i].trim();
+  for (let i = 0; i < arr.length; i++) {
+    const a = arr[i].split(':').map((x) => x.trim());
 
-    if (ar === '') {
-      continue;
-    }
-
-    const [key, value] = ar.split(':');
-
-    if (typeof value === 'undefined') {
-      continue;
-    }
-
-    result[key.trim()] = value.trim();
+    tab.push(a);
   }
 
-  return result;
+  const obj = {};
+
+  for (let i = 0; i < tab.length; i++) {
+    const a = tab[i][0];
+    const b = tab[i][1];
+
+    obj[a] = b;
+  }
+
+  return obj;
 }
 
 module.exports = convertToObject;
