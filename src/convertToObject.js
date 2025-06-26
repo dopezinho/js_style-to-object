@@ -18,10 +18,11 @@ function convertToObject(sourceString) {
   const obj = {};
 
   for (let i = 0; i < tab.length; i++) {
-    const a = tab[i][0];
-    const b = tab[i][1];
+    const [a, b] = tab[i] || [];
 
-    obj[a] = b;
+    if (typeof a === 'string' && b !== undefined) {
+      obj[a] = b;
+    }
   }
 
   return obj;
